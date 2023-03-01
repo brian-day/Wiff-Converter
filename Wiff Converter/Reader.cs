@@ -10,10 +10,10 @@ using System.Diagnostics;
 using System.ComponentModel;
 using System.Globalization;
 
-using Clearcore2.Data;
+/*using Clearcore2.Data;
 using Clearcore2.Data.AnalystDataProvider;
 using Clearcore2.Data.DataAccess;
-using Clearcore2.Data.DataAccess.SampleData;
+using Clearcore2.Data.DataAccess.SampleData;*/
 
 namespace Wiff_Converter
 {
@@ -30,8 +30,8 @@ namespace Wiff_Converter
 
         // Properties
         public int numberOfSamples;
-        private AnalystWiffDataProvider _provider;
-        private Batch batch;
+/*        private AnalystWiffDataProvider _provider;
+        private Batch batch;*/
         public string wiffFilePath;
 
         // Methods
