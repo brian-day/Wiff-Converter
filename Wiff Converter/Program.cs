@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Wiff_Converter
+namespace Wiff_Converter_Alttt
 {
     class Program
     {

@@ -14,12 +14,6 @@ using Clearcore2.Data;
 using Clearcore2.Data.AnalystDataProvider;
 using Clearcore2.Data.DataAccess;
 using Clearcore2.Data.DataAccess.SampleData;
-//using Sciex.Data.XYData;
-//using Clearcore2.RawXYProcessing;
-//using Sciex.FMan;
-
-// inspiration from https://github.com/vdemichev/DiaNN/blob/master/WiffReader/WiffReader.cpp
-// and https://github.com/ProteoWizard/pwiz/blob/master/pwiz/data/vendor_readers/ABI/Reader_ABI.cpp
 
 namespace Wiff_Converter
 {
