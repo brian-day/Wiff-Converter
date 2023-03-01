@@ -18,16 +18,17 @@ namespace Wiff_Converter
         WavelengthExplicit = 1
     }
 
-    public partial class fMain : Form
+    public partial class fMain
     {
+        // Properties
         public Dictionary<string, string> delimiters;
         public Dictionary<string, string> decimalSeparators;
         public Dictionary<string, ExportFormat> exportFormats;
         public string[] chosenFilepaths;
 
+        // Methods
         public fMain()
         {
-            InitializeComponent();
             delimiters = new Dictionary<string, string>
             {
                 { "Comma", "," },
@@ -49,24 +50,6 @@ namespace Wiff_Converter
             };
         }
 
-        private void fMain_Load(object sender, EventArgs e)
-        {
-            cbExtension.Items.Add("csv");
-            cbExtension.Items.Add("txt");
-
-            cbDelimiter.Items.AddRange(delimiters.Keys.ToArray());
-            cbDecimalSeparator.Items.AddRange(decimalSeparators.Keys.ToArray());
-            cbExportFormat.Items.AddRange(exportFormats.Keys.ToArray());
-
-            cbDelimiter.SelectedIndex = 0;
-            cbDecimalSeparator.SelectedIndex = 0;
-            cbExtension.SelectedIndex = 0;
-            cbExportFormat.SelectedIndex = 1;
-
-
-            lblNumberSig.Text = "Number of significant figures\nof exported values:";
-        }
-
         private double? TryParse(string text, NumberStyles ns, IFormatProvider formatProvider)
         {
             if (text.Trim() == String.Empty)
@@ -78,23 +61,25 @@ namespace Wiff_Converter
             return null;
         }
 
-        private async void btnConvert_Click(object sender, EventArgs e)
+        private async void cliConvert()
         {
-            if (chosenFilepaths is null)
-                return;
+            if (chosenFilepaths is null) return; // Make this an arg and delete null check.
 
-            // Once convert begins, disable the convert button until completed.
-            btnConvert.Enabled = false;
 
             // Takes args from the form and sets them for use during conversion
-            string fileExt = cbExtension.Text;
-            string delimiter = delimiters[cbDelimiter.Text];
+            chosenFilepaths = ofd.FileNames; // Originally set via gui, add as command line arg
+            string dirPath = Path.GetDirectoryName(chosenFilepaths[0]);
+            tbOutputDir.Text = fwd.SelectedPath;
+
+            // ---------
+            string fileExt = ".wiff";
+            string delimiter = ",";
             NumberFormatInfo nfi = new NumberFormatInfo();
-            nfi.NumberDecimalSeparator = decimalSeparators[cbDecimalSeparator.Text];
-            string dirPath = tbOutputDir.Text;
-            int sigFigures = (int)nudSignificantFigures.Value;
-            ExportFormat exportFormat = exportFormats[cbExportFormat.Text];
-            bool norm2TIC = cbNormalizeToTIC.Checked;
+            nfi.NumberDecimalSeparator = ".";
+            int sigFigures = 6;
+            ExportFormat exportFormat = ".csv";
+
+            bool norm2TIC = False;
 
             // Misc. Parsing?
             double? t0, t1, w0, w1, m0, m1;
@@ -105,7 +90,9 @@ namespace Wiff_Converter
             m0 = TryParse(tbCropM0.Text.Replace(',', '.'), NumberStyles.Any, nfi);
             m1 = TryParse(tbCropM1.Text.Replace(',', '.'), NumberStyles.Any, nfi);
 
+
             // Convert files in parallel (this is why this is an async method?)
+            // Make a non-parallel method?
             await Task.Run<ConcurrentQueue<Exception>>(() =>
             {
                 var exceptions = new ConcurrentQueue<Exception>();
@@ -114,6 +101,7 @@ namespace Wiff_Converter
                 {
                     try
                     {
+                        // This will read and write the needed files at dirPath.
                         Reader r = new Reader(filepath);
                         r.SaveAbsorptionMatrix(nfi, delimiter, fileExt, dirPath, exportFormat, sigFigures, w0, w1, t0, t1);
                         r.SaveMSMatrix(nfi, delimiter, fileExt, dirPath, exportFormat, norm2TIC, sigFigures, m0, m1, t0, t1);
@@ -126,61 +114,9 @@ namespace Wiff_Converter
                 });
 
                 return exceptions;
-            }).ContinueWith(task =>
-            {
-                var exQueue = task.Result;
-
-                if (!exQueue.IsEmpty)
-                {
-                    string texts = "One or multiple errors occured:\n\n";
-                    texts += string.Join("\n", exQueue.Select(ex => ex.Message));
-                    MessageBox.Show(texts, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-
-                this.BeginInvoke((MethodInvoker)delegate
-                {
-                    btnConvert.Enabled = true;
-                });
 
             });
         }
 
-        private void btnLoad_Click(object sender, EventArgs e)
-        {
-            // Launches a dialog box for choosing the wiff file(s) to convert. 
-            OpenFileDialog ofd = new OpenFileDialog
-            {
-                AddExtension = false,
-                Filter = "Wiff files (*.wiff)|*.wiff",
-                RestoreDirectory = true,
-                Multiselect = true
-            };
-
-            if (ofd.ShowDialog() == DialogResult.OK)
-            {
-                if (ofd.FileNames.Length == 0)
-                    return;
-
-                chosenFilepaths = ofd.FileNames;
-
-                tbFilenames.Text = string.Join(Environment.NewLine, chosenFilepaths);
-
-                string dirPath = Path.GetDirectoryName(chosenFilepaths[0]);
-                tbOutputDir.Text = dirPath is null ? "" : dirPath;
-            }
-
-        }
-
-        private void btnChangeDir_Click(object sender, EventArgs e)
-        {
-            FolderBrowserDialog fwd = new FolderBrowserDialog();
-            //fwd.InitialDirectory = tbOutputDir.Text;
-            fwd.ShowNewFolderButton = true;
-
-            if (fwd.ShowDialog() == DialogResult.OK)
-            {
-                tbOutputDir.Text = fwd.SelectedPath;
-            }
-        }
     }
 }

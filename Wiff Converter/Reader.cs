@@ -34,14 +34,13 @@ namespace Wiff_Converter
     internal class Reader
     {
 
-
+        // Properties
         public int numberOfSamples;
-
         private AnalystWiffDataProvider _provider;
         private Batch batch;
-
         public string wiffFilePath;
 
+        // Methods
         public Reader(string filepath)
         {
             wiffFilePath = filepath;
@@ -50,12 +49,7 @@ namespace Wiff_Converter
             numberOfSamples = GetNumberOfSamples();
         }
 
-        /// <summary>
         /// Finds nearest index of a value in a sorted array.
-        /// </summary>
-        /// <param name="array"></param>
-        /// <param name="value"></param>
-        /// <returns></returns>
         public static int FindNearestIndex(double[] array, double value)
         {
             // https://stackoverflow.com/questions/41277957/get-closest-value-in-an-array
@@ -78,23 +72,9 @@ namespace Wiff_Converter
         }
 
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="matrix"></param>
-        /// <param name="nfi"></param>
-        /// <param name="delimiter"></param>
-        /// <param name="filepath"></param>
-        /// <param name="exportFormat"></param>
-        /// <param name="sigFigures"></param>
-        /// <param name="tUnit"></param>
-        /// <param name="wlUnit"></param>
-        /// <param name="x0">Start value of exported matrix in second matrix dimension</param>
-        /// <param name="x1">End value of exported matrix in second matrix dimension</param>
-        /// <param name="y0">Start value of exported matrix in first matrix dimension</param>
-        /// <param name="y1">End value of exported matrix in first matrix dimension</param>
         private void SaveMatrix(Matrix matrix, NumberFormatInfo nfi, string delimiter, string filepath,
-                                ExportFormat exportFormat, int sigFigures = 6, string tUnit = "min", string wlUnit = "wavelength",
+                                ExportFormat exportFormat, int sigFigures = 6,
+                                string tUnit = "min", string wlUnit = "wavelength",
                                 double? x0 = null, double? x1 = null, double? y0 = null, double? y1 = null)
         {
             string strFormat = $"G{sigFigures}";
@@ -148,7 +128,8 @@ namespace Wiff_Converter
 
         public void SaveMSMatrix(NumberFormatInfo nfi, string delimiter, string fileExtension, string dirPath,
                                  ExportFormat exportFormat, bool normToTIC = false, int sigFigures = 6,
-                                 double? mz0 = null, double? mz1 = null, double? t0 = null, double? t1 = null, string filenamePrefix = "MS_")
+                                 double? mz0 = null, double? mz1 = null, double? t0 = null, double? t1 = null,
+                                 string filenamePrefix = "MS_")
         {
             string filename = Path.GetFileName(wiffFilePath);
             string filePath = Path.GetFileNameWithoutExtension(filename);
@@ -235,7 +216,8 @@ namespace Wiff_Converter
 
         public void SaveAbsorptionMatrix(NumberFormatInfo nfi, string delimiter, string fileExtension, string dirPath,
                                          ExportFormat exportFormat, int sigFigures = 6,
-                                         double? w0 = null, double? w1 = null, double? t0 = null, double? t1 = null, string filenamePrefix = "UV_")
+                                         double? w0 = null, double? w1 = null, double? t0 = null, double? t1 = null,
+                                         string filenamePrefix = "UV_")
         {
             string filename = Path.GetFileName(wiffFilePath);
             string filePath = Path.GetFileNameWithoutExtension(filename);
@@ -288,39 +270,6 @@ namespace Wiff_Converter
                 SaveMatrix(mat, nfi, delimiter, newFilePath, exportFormat, sigFigures, "min", "wavelength", w0, w1, t0, t1);
             }
         }
-
-        /*
-        public void test()
-        {
-            Sample sample = batch.GetSample(0);
-
-            DADSample dadSample = sample.DADSample;
-            MassSpectrometerSample msSample = sample.MassSpectrometerSample;
-
-            //int mssCount = msSample.;
-            MSExperiment mse = msSample.GetMSExperiment(0);
-            int n = mse.Details.NumberOfScans;
-
-            int nDAD = dadSample.NumberOfSpectra;
-
-            double[] wavelengths = dadSample.GetWavelengthSpectrum(0).GetActualXValues();
-
-            for (int i = 0; i < nDAD; i++)
-            {
-                WavelengthSpectrum ws = dadSample.GetWavelengthSpectrum(i);
-                //double[] x = ws.GetActualXValues();
-                double[] y = ws.GetActualYValues();
-            }
-
-
-            //printSampleInfo(sample);
-
-            //Reader.printSampleInfo(sample);
-            //int i = 0;
-
-
-        }
-        */
 
         public int GetNumberOfSamples()
         {
