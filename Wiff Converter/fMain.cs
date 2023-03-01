@@ -83,8 +83,10 @@ namespace Wiff_Converter
             if (chosenFilepaths is null)
                 return;
 
+            // Once convert begins, disable the convert button until completed.
             btnConvert.Enabled = false;
 
+            // Takes args from the form and sets them for use during conversion
             string fileExt = cbExtension.Text;
             string delimiter = delimiters[cbDelimiter.Text];
             NumberFormatInfo nfi = new NumberFormatInfo();
@@ -94,6 +96,7 @@ namespace Wiff_Converter
             ExportFormat exportFormat = exportFormats[cbExportFormat.Text];
             bool norm2TIC = cbNormalizeToTIC.Checked;
 
+            // Misc. Parsing?
             double? t0, t1, w0, w1, m0, m1;
             t0 = TryParse(tbCropT0.Text.Replace(',', '.'), NumberStyles.Any, nfi);
             t1 = TryParse(tbCropT1.Text.Replace(',', '.'), NumberStyles.Any, nfi);
@@ -102,6 +105,7 @@ namespace Wiff_Converter
             m0 = TryParse(tbCropM0.Text.Replace(',', '.'), NumberStyles.Any, nfi);
             m1 = TryParse(tbCropM1.Text.Replace(',', '.'), NumberStyles.Any, nfi);
 
+            // Convert files in parallel (this is why this is an async method?)
             await Task.Run<ConcurrentQueue<Exception>>(() =>
             {
                 var exceptions = new ConcurrentQueue<Exception>();
@@ -143,6 +147,7 @@ namespace Wiff_Converter
 
         private void btnLoad_Click(object sender, EventArgs e)
         {
+            // Launches a dialog box for choosing the wiff file(s) to convert. 
             OpenFileDialog ofd = new OpenFileDialog
             {
                 AddExtension = false,
