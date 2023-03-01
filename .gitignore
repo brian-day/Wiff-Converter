@@ -35,7 +35,7 @@ bld/
 [Ll]og/
 [Ll]ogs/
 
-Wiff\ Converter/bin/Release/*.dll
+# Wiff\ Converter/bin/Release/*.dll
 Wiff\ Converter/bin/Release/*.config
 Wiff\ Converter/bin/Release/*.pdb
 
