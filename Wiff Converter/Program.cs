@@ -6,7 +6,7 @@ namespace Wiff_Converter
     {
         static void Main(string[] args)
         {
-            fMain fm1 = fMain();
+            fMain fm1 = new fMain();
             fm1.cliConvert(args);
         }
     }
