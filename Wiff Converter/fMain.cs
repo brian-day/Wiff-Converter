@@ -24,7 +24,7 @@ namespace Wiff_Converter
         public Dictionary<string, string> delimiters;
         public Dictionary<string, string> decimalSeparators;
         public Dictionary<string, ExportFormat> exportFormats;
-        public string[] chosenFilepaths;
+        public string[] chosenFilepaths = {"TestPath/TestFileName"};
 
         // Methods
         public fMain()
@@ -67,7 +67,7 @@ namespace Wiff_Converter
 
 
             // Takes args from the form and sets them for use during conversion
-            chosenFilepaths = {"TestPath/TestFileName"}; // Originally set via gui, add as command line arg
+            //chosenFilepaths = {"TestPath/TestFileName"}; // Originally set via gui, add as command line arg
             Console.WriteLine(chosenFilepaths[0]);
             string dirPath = Path.GetDirectoryName(chosenFilepaths[0]);
             Console.WriteLine(dirPath);
@@ -78,7 +78,7 @@ namespace Wiff_Converter
             NumberFormatInfo nfi = new NumberFormatInfo();
             nfi.NumberDecimalSeparator = ".";
             int sigFigures = 6;
-            ExportFormat exportFormat = ".csv";
+            ExportFormat exportFormat = 0; // Must be 0 or 1. See top of file.
 
             bool norm2TIC = false;
 
