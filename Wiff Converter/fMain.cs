@@ -24,7 +24,7 @@ namespace Wiff_Converter
         public Dictionary<string, string> delimiters;
         public Dictionary<string, string> decimalSeparators;
         public Dictionary<string, ExportFormat> exportFormats;
-        public string[] chosenFilepaths = {"TestPath/TestFileName"};
+        //public string[] chosenFilepaths = {"TestPath/TestFileName"};
 
         // Methods
         public fMain()
@@ -61,16 +61,13 @@ namespace Wiff_Converter
             return null;
         }
 
-        private async void cliConvert()
+        public async void cliConvert(string[] fileIn)
         {
-            if (chosenFilepaths is null) return; // Make this an arg and delete null check.
-
 
             // Takes args from the form and sets them for use during conversion
-            //chosenFilepaths = {"TestPath/TestFileName"}; // Originally set via gui, add as command line arg
-            Console.WriteLine(chosenFilepaths[0]);
+            public string[] chosenFilepaths = fileIn;
             string dirPath = Path.GetDirectoryName(chosenFilepaths[0]);
-            Console.WriteLine(dirPath);
+            Console.WriteLine("Output Directory: ", dirPath);
 
             // ---------
             string fileExt = ".wiff";
