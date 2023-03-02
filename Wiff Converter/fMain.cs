@@ -81,14 +81,14 @@ namespace Wiff_Converter
 
             bool norm2TIC = False;
 
-            // Misc. Parsing?
+            // Other values pulled from form. Typically Null in Form.
             double? t0, t1, w0, w1, m0, m1;
-            t0 = TryParse(tbCropT0.Text.Replace(',', '.'), NumberStyles.Any, nfi);
-            t1 = TryParse(tbCropT1.Text.Replace(',', '.'), NumberStyles.Any, nfi);
-            w0 = TryParse(tbCropW0.Text.Replace(',', '.'), NumberStyles.Any, nfi);
-            w1 = TryParse(tbCropW1.Text.Replace(',', '.'), NumberStyles.Any, nfi);
-            m0 = TryParse(tbCropM0.Text.Replace(',', '.'), NumberStyles.Any, nfi);
-            m1 = TryParse(tbCropM1.Text.Replace(',', '.'), NumberStyles.Any, nfi);
+            t0 = TryParse("", NumberStyles.Any, nfi);
+            t1 = TryParse("", NumberStyles.Any, nfi);
+            w0 = TryParse("", NumberStyles.Any, nfi);
+            w1 = TryParse("", NumberStyles.Any, nfi);
+            m0 = TryParse("", NumberStyles.Any, nfi);
+            m1 = TryParse("", NumberStyles.Any, nfi);
 
 
             // Convert files in parallel (this is why this is an async method?)

@@ -7,4 +7,87 @@
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Reference Include="Clearcore2.Compression">
+      <HintPath>bin\Release\Clearcore2.Compression.dll</HintPath>
+    </Reference>
+    <Reference Include="Clearcore2.Data">
+      <HintPath>bin\Release\Clearcore2.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Clearcore2.Data.AnalystDataProvider">
+      <HintPath>bin\Release\Clearcore2.Data.AnalystDataProvider.dll</HintPath>
+    </Reference>
+    <Reference Include="Clearcore2.Data.Client">
+      <HintPath>bin\Release\Clearcore2.Data.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="Clearcore2.Data.CommonInterfaces">
+      <HintPath>bin\Release\Clearcore2.Data.CommonInterfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Clearcore2.Data.Wiff2">
+      <HintPath>bin\Release\Clearcore2.Data.Wiff2.dll</HintPath>
+    </Reference>
+    <Reference Include="Clearcore2.Data.WiffReader">
+      <HintPath>bin\Release\Clearcore2.Data.WiffReader.dll</HintPath>
+    </Reference>
+    <Reference Include="Clearcore2.Devices.Types">
+      <HintPath>bin\Release\Clearcore2.Devices.Types.dll</HintPath>
+    </Reference>
+    <Reference Include="Clearcore2.Domain.Acquisition">
+      <HintPath>bin\Release\Clearcore2.Domain.Acquisition.dll</HintPath>
+    </Reference>
+    <Reference Include="Clearcore2.Infrastructure">
+      <HintPath>bin\Release\Clearcore2.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Clearcore2.InternalRawXYProcessing">
+      <HintPath>bin\Release\Clearcore2.InternalRawXYProcessing.dll</HintPath>
+    </Reference>
+    <Reference Include="Clearcore2.Muni">
+      <HintPath>bin\Release\Clearcore2.Muni.dll</HintPath>
+    </Reference>
+    <Reference Include="Clearcore2.RawXYProcessing">
+      <HintPath>bin\Release\Clearcore2.RawXYProcessing.dll</HintPath>
+    </Reference>
+    <Reference Include="Clearcore2.StructuredStorage">
+      <HintPath>bin\Release\Clearcore2.StructuredStorage.dll</HintPath>
+    </Reference>
+    <Reference Include="Clearcore2.Utility">
+      <HintPath>bin\Release\Clearcore2.Utility.dll</HintPath>
+    </Reference>
+    <Reference Include="Clearcore2.XmlHelpers">
+      <HintPath>bin\Release\Clearcore2.XmlHelpers.dll</HintPath>
+    </Reference>
+    <Reference Include="SCIEX.Apis.Data.v1">
+      <HintPath>bin\Release\SCIEX.Apis.Data.v1.dll</HintPath>
+    </Reference>
+    <Reference Include="Sciex.Clearcore.FMan">
+      <HintPath>bin\Release\Sciex.Clearcore.FMan.dll</HintPath>
+    </Reference>
+    <Reference Include="Sciex.Data.Processing">
+      <HintPath>bin\Release\Sciex.Data.Processing.dll</HintPath>
+    </Reference>
+    <Reference Include="Sciex.Data.SimpleTypes">
+      <HintPath>bin\Release\Sciex.Data.SimpleTypes.dll</HintPath>
+    </Reference>
+    <Reference Include="Sciex.Data.XYData">
+      <HintPath>bin\Release\Sciex.Data.XYData.dll</HintPath>
+    </Reference>
+    <Reference Include="Sciex.FMan">
+      <HintPath>bin\Release\Sciex.FMan.dll</HintPath>
+    </Reference>
+    <Reference Include="Sciex.Wiff">
+      <HintPath>bin\Release\Sciex.Wiff.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+
 </Project>
