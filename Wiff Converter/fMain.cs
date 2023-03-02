@@ -67,9 +67,10 @@ namespace Wiff_Converter
 
 
             // Takes args from the form and sets them for use during conversion
-            chosenFilepaths = ofd.FileNames; // Originally set via gui, add as command line arg
+            chosenFilepaths = {"TestPath/TestFileName"}; // Originally set via gui, add as command line arg
+            Console.WriteLine(chosenFilepaths[0]);
             string dirPath = Path.GetDirectoryName(chosenFilepaths[0]);
-            tbOutputDir.Text = fwd.SelectedPath;
+            Console.WriteLine(dirPath);
 
             // ---------
             string fileExt = ".wiff";
@@ -79,7 +80,7 @@ namespace Wiff_Converter
             int sigFigures = 6;
             ExportFormat exportFormat = ".csv";
 
-            bool norm2TIC = False;
+            bool norm2TIC = false;
 
             // Other values pulled from form. Typically Null in Form.
             double? t0, t1, w0, w1, m0, m1;
